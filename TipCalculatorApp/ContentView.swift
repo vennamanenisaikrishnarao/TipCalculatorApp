@@ -120,23 +120,31 @@ struct ContentView: View {
             .padding(.top, 10)
             
             if showResults {
-                VStack(spacing: 10) {
-
-                    Text("Tip Amount: \(tipAmount, format:  .currency(code: currency[selectedCurrency]))")
-                    
-                    Text("Total Amount: \(totalAmount, format:  .currency(code: currency[selectedCurrency]))")
-                    
-                    Text("Amount Per Person: \(amountPerPerson, format:  .currency(code: currency[selectedCurrency]))")
-                    
+                if billAmount == 0 {
+                    Text("Please select a bill amount to calculate the tip.")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.red)
+                        .padding()
+                        .background(Color.white.opacity(0.8))
+                        .cornerRadius(12)
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.red, lineWidth: 1))
+                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 5, y: 5)
+                        .padding(.horizontal, 20)
+                } else {
+                    VStack(spacing: 10) {
+                        Text("Tip Amount: \(tipAmount, format: .currency(code: currency[selectedCurrency]))")
+                        Text("Total Amount: \(totalAmount, format: .currency(code: currency[selectedCurrency]))")
+                        Text("Amount Per Person: \(amountPerPerson, format: .currency(code: currency[selectedCurrency]))")
+                    }
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.black)
+                    .padding()
+                    .background(Color.white.opacity(0.5))
+                    .cornerRadius(12)
+                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.5), lineWidth: 1))
+                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 5, y: 5)
+                    .padding(.horizontal, 20)
                 }
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.black)
-                .padding()
-                .background(Color.white.opacity(0.5))
-                .cornerRadius(12)
-                .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.5), lineWidth: 1))
-                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 5, y: 5)
-                .padding(.horizontal, 20)
             }
             
             Spacer()
